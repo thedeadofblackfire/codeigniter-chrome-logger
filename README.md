@@ -1,4 +1,4 @@
-# CodeIgniter Chrome Logger
+# Overview
 
 CodeIgniter Chrome Logger is just a simple wrapper around the [ChromePHP](https://github.com/ccampbell/chromephp) which allows you to use ChromePHP and the [Chrome Logger extension](https://chrome.google.com/webstore/detail/chrome-logger/noaneddfkdjfnfdakjjmocngnfkfehhd?hl=en) following [CodeIgniter library style](http://ellislab.com/codeigniter/user-guide/general/creating_libraries.html) guidelines.
 
