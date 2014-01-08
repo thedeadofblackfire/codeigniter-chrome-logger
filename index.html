@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Codeigniter Chrome Logger by gusrub</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Codeigniter Chrome Logger</h1>
+        <h2>A simple tool that wraps ChromePHP into a CodeIgniter library.</h2>
+        <a href="https://github.com/gusrub/codeigniter-chrome-logger" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h1>
+
+<p>CodeIgniter Chrome Logger is just a simple wrapper around the <a href="https://github.com/ccampbell/chromephp">ChromePHP</a> which allows you to use ChromePHP and the <a href="https://chrome.google.com/webstore/detail/chrome-logger/noaneddfkdjfnfdakjjmocngnfkfehhd?hl=en">Chrome Logger extension</a> following <a href="http://ellislab.com/codeigniter/user-guide/general/creating_libraries.html">CodeIgniter library style</a> guidelines.</p>
+
+<p><a href="https://chrome.google.com/webstore/detail/chrome-logger/noaneddfkdjfnfdakjjmocngnfkfehhd?hl=en">Chrome Logger extension</a> is a <em>client-side</em> library or chrome extension that allows you to debug <em>server-side</em> code for many languages, included PHP.</p>
+
+<p><a href="https://github.com/ccampbell/chromephp">ChromePHP</a> is the <em>server-side</em> library used to send the debug info to the <em>client-side</em> Chrome Logger extension. Obviously for PHP.</p>
+
+<p><a href="https://chrome.google.com/webstore/detail/chrome-logger/noaneddfkdjfnfdakjjmocngnfkfehhd?hl=en">CodeIgniter Chrome Logger</a> is just a wrapper that will allow you to easily use ChromePHP as a CodeIgniter library.</p>
+
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<p>In order to succesfully use this library you'll need:</p>
+
+<ol>
+<li>PHP 5.x &gt;</li>
+<li>CodeIgniter 2.x &gt;</li>
+<li>ChromePHP extension 4.1.0 &gt;</li>
+<li>Chrome Logger extension for Google Chrome</li>
+<li>Of course, google chrome</li>
+</ol><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>As stated before, this CodeIgniter library relies upon ChromePHP, which is of course not included here. Download it and put it inside the libraries folder, so for example if you have the following:</p>
+
+<p><code>CI_root/application/libraries/</code></p>
+
+<p>You'll end up with a folder like this:</p>
+
+<p><code>CI_root/application/libraries/ChromePhp</code></p>
+
+<p>If you organize your libraries in subfolders, so for example you have the CodeIgniter Chrome Logger inside its own folder and not in the root, then make sure the ChromePhp library folder is INSIDE your library folder like so:</p>
+
+<p><code>CI_root/application/libraries/codeigniter-chrome-logger/ChromePhp</code></p>
+
+<p>Considering you named your library folder <em>codeigniter-chrome-logger</em></p>
+
+<p>And that's it, you are good to go.</p>
+
+<h2>
+<a name="loading-the-library" class="anchor" href="#loading-the-library"><span class="octicon octicon-link"></span></a>Loading the library</h2>
+
+<p>First you need to load the library. To do so, you'll just use the regular way to do it:</p>
+
+<h3>
+<a name="autoloading-it" class="anchor" href="#autoloading-it"><span class="octicon octicon-link"></span></a>Autoloading it</h3>
+
+<p>Make sure you add <em>chrome-logger</em> to your <code>autoload.php</code> configuration file:</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$autoload</span><span class="p">[</span><span class="s1">'libraries'</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'database'</span><span class="p">,</span> <span class="s1">'session'</span><span class="p">,</span> <span class="s1">'chrome_logger'</span><span class="p">);</span>
+</pre></div>
+
+<h3>
+<a name="manual-load" class="anchor" href="#manual-load"><span class="octicon octicon-link"></span></a>Manual load</h3>
+
+<p>If you prefer not to have globally load the library over the entire application (which is recommended for performance by the way) just load it on your controllers or models or wherever you need it:</p>
+
+<p><strong>If it is on the root library:</strong></p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">library</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">'Chrome_logger'</span><span class="p">);</span>
+</pre></div>
+
+<p><strong>If it is on a subfolder:</strong></p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">library</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">'subfolder/Chrome_logger'</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="basic-usage" class="anchor" href="#basic-usage"><span class="octicon octicon-link"></span></a>Basic usage</h2>
+
+<p>Once you have loaded the library you need to make sure that you have the <code>ENVIRONMENT</code> constant defined as <em>development</em> on your main <code>index.php</code> application file of CodeIgniter, otherwise, for security reasons, a warning message and no debug information will be shown on the console.</p>
+
+<p><strong>Send Info</strong></p>
+
+<div class="highlight highlight-php"><pre><span class="c1">//[$var can be anything ]:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="nv">$var</span> <span class="o">=</span> <span class="s1">'This is an INFO message'</span><span class="p">);</span>
+</pre></div>
+
+<p><strong>Send Warning</strong></p>
+
+<div class="highlight highlight-php"><pre><span class="c1">//[$var can be anything ]:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">warn</span><span class="p">(</span><span class="nv">$var</span> <span class="o">=</span> <span class="s1">'This is a WARN message'</span><span class="p">);</span> 
+</pre></div>
+
+<p><strong>Send error</strong></p>
+
+<div class="highlight highlight-php"><pre><span class="c1">//[$var can be anything ]:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="nv">$var</span> <span class="o">=</span> <span class="s1">'This is an ERROR message'</span><span class="p">);</span>
+</pre></div>
+
+<p><strong>Send log</strong></p>
+
+<div class="highlight highlight-php"><pre><span class="c1">//[$var can be anything ]:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">(</span><span class="nv">$var</span> <span class="o">=</span> <span class="s1">'This is just a LOG'</span><span class="p">);</span>
+</pre></div>
+
+<p><strong>Send grouped information</strong></p>
+
+<div class="highlight highlight-php"><pre><span class="c1">//[GROUP, Send information grouped, $var is the header for that group ]:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">group</span><span class="p">(</span><span class="nv">$var</span> <span class="o">=</span> <span class="s1">'Group I'</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">'Some info for group I'</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">'Some more info for group I'</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">group_end</span><span class="p">();</span>  
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">group</span><span class="p">(</span><span class="nv">$var</span> <span class="o">=</span> <span class="s1">'Group II'</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">'Some info for group II'</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">'Some more info for group II'</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">group_end</span><span class="p">();</span>
+</pre></div>
+
+<p><strong>Send grouped information, but collapsed</strong></p>
+
+<div class="highlight highlight-php"><pre><span class="c1">//[GROUP COLLAPSED, Same as group() only it will send it so that it is collapsed on console, </span>
+<span class="c1">//$var is the header for that group ]:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">group_collapsed</span><span class="p">(</span><span class="nv">$var</span> <span class="o">=</span> <span class="s1">'Group II'</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">'Some info for group II'</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">'Some more info for group II'</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">group_end</span><span class="p">();</span>
+</pre></div>
+
+<p><strong>Send information and display it as a table in the console of chrome</strong></p>
+
+<div class="highlight highlight-php"><pre><span class="c1">//[TABLE, will display the info as an ordered table on console, </span>
+<span class="c1">//$var can be anything but preferably a list of objects so it actually makes sense ]:</span>
+<span class="nv">$p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s1">'John'</span><span class="p">,</span> <span class="s1">'Wayne'</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">);</span>
+<span class="nv">$p2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s1">'Gena'</span><span class="p">,</span> <span class="s1">'Rowllands'</span><span class="p">,</span> <span class="s1">'F'</span><span class="p">);</span>
+<span class="nv">$p3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s1">'Clark'</span><span class="p">,</span> <span class="s1">'Gable'</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">chromelogger</span><span class="o">-&gt;</span><span class="na">table</span><span class="p">(</span><span class="nv">$p1</span><span class="p">,</span> <span class="nv">$p2</span><span class="p">,</span> <span class="nv">$p3</span><span class="p">);</span>
+</pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/gusrub/codeigniter-chrome-logger/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/gusrub/codeigniter-chrome-logger/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/gusrub/codeigniter-chrome-logger"></a> is maintained by <a href="https://github.com/gusrub">gusrub</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-34342165-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
