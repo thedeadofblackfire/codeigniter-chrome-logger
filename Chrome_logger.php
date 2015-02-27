@@ -21,7 +21,7 @@
  *
  * Loading it from your controller:
  * 
- * $this->load->library('ChromeLogger');
+ * $this->load->library('Chrome_logger');
  *
  * Basic usage: 
  *
@@ -137,7 +137,9 @@ class Chrome_logger {
 	{
 		if($this->is_logging_output_allowed()) 
 		{
-			return $this->chromephp->log( func_get_args() );	
+			$data = func_get_args();
+			if (func_num_args() == 1) $data = $data[0];
+			return $this->chromephp->log( $data );	
 		}
 	}
 
@@ -145,7 +147,9 @@ class Chrome_logger {
 	{
 		if($this->is_logging_output_allowed()) 
 		{
-			return $this->chromephp->warn( func_get_args() );
+			$data = func_get_args();
+			if (func_num_args() == 1) $data = $data[0];
+			return $this->chromephp->warn( $data );
 		}
 	}
 
@@ -153,7 +157,9 @@ class Chrome_logger {
 	{
 		if($this->is_logging_output_allowed()) 
 		{
-			return $this->chromephp->error( func_get_args() );
+			$data = func_get_args();
+			if (func_num_args() == 1) $data = $data[0];
+			return $this->chromephp->error( $data );
 		}
 	}
 
@@ -161,7 +167,9 @@ class Chrome_logger {
 	{
 		if($this->is_logging_output_allowed()) 
 		{		
-			return $this->chromephp->group( func_get_args() );
+			$data = func_get_args();
+			if (func_num_args() == 1) $data = $data[0];
+			return $this->chromephp->group( $data );
 		}
 	}
 
@@ -169,7 +177,9 @@ class Chrome_logger {
 	{
 		if($this->is_logging_output_allowed()) 
 		{
-			return $this->chromephp->info( func_get_args() );
+			$data = func_get_args();
+			if (func_num_args() == 1) $data = $data[0];
+			return $this->chromephp->info( $data );
 		}
 	}
 
@@ -177,7 +187,9 @@ class Chrome_logger {
 	{
 		if($this->is_logging_output_allowed()) 
 		{
-			return $this->chromephp->groupCollapsed( func_get_args() );
+			$data = func_get_args();
+			if (func_num_args() == 1) $data = $data[0];
+			return $this->chromephp->groupCollapsed( $data );
 		}	
 	}
 
